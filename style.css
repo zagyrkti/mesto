@@ -379,6 +379,10 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.popup_opened {
+  display: flex;
+}
+
 .profile-edit-popup__form {
   position: relative;
   box-sizing: border-box;
