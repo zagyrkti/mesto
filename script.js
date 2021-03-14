@@ -18,8 +18,7 @@ profileEditPopupCloseBtn.addEventListener("click", function () {
   profileEditPopup.classList.remove("popup_opened");
 })
 
-
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = profileEditPopupName.value;
   profileStatus.textContent = profileEditPopupStatus.value;

@@ -4,7 +4,7 @@
 }
 */
 
-@font-face {
+/*@font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 900;
@@ -29,31 +29,34 @@
   font-display: swap;
   src: url("./fonts/Inter-Regular.woff2?v=3.15") format("woff2"),
   url("./fonts/Inter-Regular.woff?v=3.15") format("woff");
-}
+}*/
 
 
+/*
 .body {
   color: white;
   font-family: Inter, Arial, sans-serif;
+  !*Черный слишком черный, контраст жестковат, проект учебный биды не будет если слегка посветлее будет подумал я*!
   background-color: #212121;
 }
+*/
 
-.page {
+/*.page {
   margin: 0 auto;
   padding: 45px 0 60px 0;
   min-width: 320px;
   max-width: 1280px;
-}
+}*/
 
-@media screen and (max-width: 545px) {
+/*@media screen and (max-width: 545px) {
   .page {
     padding: 28px 0 36px 0;
   }
-}
+}*/
 
 /*---------------------------header--------------------------*/
 
-.header {
+/*.header {
   max-width: 880px;
   margin: 0 auto;
   padding: 0 19px;
@@ -63,8 +66,9 @@
   .header {
     padding: 0;
   }
-}
+}*/
 
+/*
 .header__logo {
   width: 142px;
   height: 33px;
@@ -82,8 +86,10 @@
     height: 24px;
   }
 }
+*/
 
 
+/*
 .header__separator {
   margin: 41px auto 0 auto;
 
@@ -96,95 +102,86 @@
     margin: 31px auto 0 auto;
   }
 }
+*/
 
 /*-----------------------------profile-------------------------------*/
 
-.profile {
+/*.profile {
   margin: 40px auto 0 auto;
   padding: 0 19px;
   max-width: 880px;
 
   display: grid;
-  grid-template-columns: min-content min-content 1fr;
-  grid-gap: 26px 30px;
-  grid-template-areas: "avatar info add";
-}
+  justify-content: center;
+  grid-template-columns: min-content minmax(min-content, 2fr) minmax(150px, 1fr);
+  grid-template-rows: min-content min-content;
+  grid-gap: 0 30px;
+  grid-template-areas: "avatar name add"
+                        "avatar status add";
+}*/
 
-@media screen and (max-width: 720px) {
+/*@media screen and (max-width: 720px) {
   .profile {
-    max-width: 487px;
-
-    grid-template-columns: min-content min-content;
-    grid-template-rows: min-content min-content;
+    grid-template-columns: min-content minmax(min-content, 1fr);
+    grid-template-rows: min-content min-content min-content;
     grid-template-areas:
-            "avatar info"
+            "avatar name"
+            "avatar status"
             "add add";
   }
-}
+}*/
 
-@media screen and (max-width: 545px) {
+/*@media screen and (max-width: 545px) {
   .profile {
     margin: 42px auto 0 auto;
-    max-width: 282px;
 
-    grid-template-columns: min-content;
-    grid-template-rows: min-content min-content min-content;
+    grid-template-columns: max-content;
+    grid-template-rows: min-content min-content min-content min-content;
     grid-template-areas: "avatar"
-                          "info"
+                          "name"
+                          "status"
                           "add";
   }
-}
+}*/
 
-.profile__avatar {
+/*.profile__avatar {
   width: 120px;
-
+  height: 120px;
+  grid-area: avatar;
   justify-self: center;
-}
+  border-radius: 50%;
+  object-fit: cover;
+}*/
 
-.profile__info {
-  display: flex;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-  margin: 24px 0 0 0;
-  min-width: 337px;
-}
-
-@media screen and (max-width: 545px) {
-  .profile__info {
-    margin: 0;
-    min-width: 282px;
-
-    justify-content: center;
-  }
-}
-
-
-.profile__name {
+/*.profile__name {
   margin: 0;
-  max-width: 294px;
 
+  align-self: end;
+  grid-area: name;
+  display: flex;
   font-size: 42px;
   font-weight: 500;
   line-height: 42px;
 
-}
+}*/
 
-@media screen and (max-width: 545px) {
+/*@media screen and (max-width: 545px) {
   .profile__name {
+    margin: 26px 0 0 0;
     padding: 0 0 0 25px;
 
+    justify-self: center;
     font-size: 27px;
     line-height: 32px;
   }
-}
+}*/
 
-.profile__edit {
+/*.profile__edit {
   margin: 12px 0 0 19px;
   width: 24px;
   height: 24px;
 
+  flex-shrink: 0;
   box-sizing: border-box;
   background-color: #212121;
   background-image: url("./images/edit.svg");
@@ -201,30 +198,32 @@
 
     background-size: 8px;
   }
-}
+}*/
 
-
-.profile__status {
+/*.profile__status {
   margin: 11px 0 0 0;
   padding: 0;
 
+  grid-area: status;
   font-size: 18px;
   line-height: 22px;
-}
+}*/
 
-@media screen and (max-width: 545px) {
+/*@media screen and (max-width: 545px) {
   .profile__status {
     margin: 8px 0 0 0;
 
+    justify-self: center;
     font-size: 14px;
     line-height: 17px;
   }
-}
+}*/
 
-.profile__add {
+/*.profile__add {
   width: 150px;
   height: 50px;
 
+  grid-area: add;
   background-color: #212121;
   border: 2px solid #FFFFFF;
   background-image: url("./images/add.svg");
@@ -232,11 +231,11 @@
   background-position: center;
   justify-self: end;
   align-self: center;
-}
+}*/
 
-@media screen and (max-width: 720px) {
+/*@media screen and (max-width: 720px) {
   .profile__add {
-    margin: 7px 0 0 0;
+    margin: 33px 0 0 0;
     width: 282px;
     height: 50px;
 
@@ -244,23 +243,25 @@
     grid-area: add;
     justify-self: center;
   }
-}
+}*/
 
 /*----------------------content---------------------------------*/
+/*
 
 .content {
   max-width: 880px;
   margin: 50px auto 0 auto;
   padding: 0 19px;
 }
+*/
 
-@media screen and (max-width: 545px) {
+/*@media screen and (max-width: 545px) {
   .content {
     margin: 36px auto 0 auto;
   }
-}
+}*/
 
-.cards {
+/*.cards {
   margin: 0;
   padding: 0;
   font-size: 0;
@@ -269,21 +270,20 @@
   list-style-type: none;
   grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   grid-gap: 20px 17px;
+}*/
 
-}
-
-.cards__item {
+/*.cards__item {
   display: flex;
   flex-direction: column;
-}
+}*/
 
-.cards__photo-sizer {
+/*.cards__photo-sizer {
   width: 100%;
   padding-bottom: 100%;
   position: relative;
-}
+}*/
 
-.cards__photo {
+/*.cards__photo {
   position: absolute;
   top: 0;
   right: 0;
@@ -292,9 +292,9 @@
 
   object-fit: cover;
   border-radius: 10px 10px 0 0;
-}
+}*/
 
-.cards__info {
+/*.cards__info {
   padding: 25px 0;
   display: flex;
   align-items: center;
@@ -302,9 +302,9 @@
   background-color: #FFFFFF;
   color: #000000;
   border-radius: 0 0 10px 10px;
-}
+}*/
 
-.cards__title {
+/*.cards__title {
   margin: 0 auto 0 21px;
 
   font-size: 24px;
@@ -313,9 +313,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
+}*/
 
-.cards__like {
+/*.cards__like {
   flex-shrink: 0;
   margin: 5px 21px 0 0;
   width: 22px;
@@ -327,12 +327,12 @@
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-}
+}*/
 
 
 /*-------------------footer-------------------------*/
 
-.footer {
+/*.footer {
   margin: 66px auto 0 auto;
   max-width: 880px;
   padding: 0 19px 0 19px;
@@ -342,9 +342,10 @@
   .footer {
     margin: 48px auto 0 auto;
   }
-}
+}*/
 
 
+/*
 .footer__copyright {
   margin: 0;
 
@@ -362,28 +363,29 @@
     line-height: 17px;
   }
 }
+*/
 
 /*-----------------------popup-------------------------*/
 
-.popup {
+/*.popup {
   width: 100%;
   height: 100%;
   position: fixed;
   left: 0;
   top: 0;
-  /*---display flex display none toggle*/
+
   display: none;
   justify-content: center;
   align-items: center;
 
   background-color: rgba(0, 0, 0, 0.5);
-}
+}*/
 
-.popup_opened {
+/*.popup_opened {
   display: flex;
-}
+}*/
 
-.profile-edit-popup__form {
+/*.profile-edit-popup__form {
   position: relative;
   box-sizing: border-box;
   max-width: 430px;
@@ -399,9 +401,9 @@
     max-width: 282px;
     padding: 25px 22px 25px 22px;
   }
-}
+}*/
 
-.profile-edit-popup__title {
+/*.profile-edit-popup__title {
   margin: 0;
   font-size: 24px;
   line-height: 29px;
@@ -415,9 +417,9 @@
     font-size: 18px;
     line-height: 22px;
   }
-}
+}*/
 
-.profile-edit-popup__name {
+/*.profile-edit-popup__name {
   margin: 47px 0 0 0;
   padding: 0 0 7px 0;
   box-sizing: border-box;
@@ -435,9 +437,9 @@
   .profile-edit-popup__name {
     margin: 75px 0 0 0;
   }
-}
+}*/
 
-.profile-edit-popup__status {
+/*.profile-edit-popup__status {
   margin: 30px 0 0 0;
   padding: 0 0 7px 0;
   box-sizing: border-box;
@@ -449,9 +451,9 @@
   font-weight: 400;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
+}*/
 
-.profile-edit-popup__save {
+/*.profile-edit-popup__save {
   margin: 48px 0 0 0;
   width: 100%;
   min-height: 50px;
@@ -473,8 +475,9 @@
     font-size: 14px;
     line-height: 17px;
   }
-}
+}*/
 
+/*
 .profile-edit-popup__close {
   position: absolute;
   top: -40px;
@@ -498,4 +501,4 @@
     width: 26px;
     height: 26px;
   }
-}
+}*/

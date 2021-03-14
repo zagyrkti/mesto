@@ -1,0 +1,39 @@
+/*-----------------vendor*/
+@import "../vendor/normalize.css";
+@import "../vendor/fonts/fonts.css";
+@import "../blocks/body/body.css";
+@import "../blocks/page/page.css";
+/*---------------------------header--------------------------*/
+@import "../blocks/header/header.css";
+@import "../blocks/header/__logo/header__logo.css";
+@import "../blocks/header/__separator/header__separator.css";
+/*-----------------------------profile-------------------------------*/
+@import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__wrapper/profile__wrapper.css";
+@import "../blocks/profile/__name/profile__name.css";
+@import "../blocks/profile/__edit/profile__edit.css";
+@import "../blocks/profile/__status/profile__status.css";
+@import "../blocks/profile/__add/profile__add.css";
+/*----------------------content---------------------------------*/
+@import "../blocks/content/content.css";
+@import "../blocks/cards/cards.css";
+@import "../blocks/cards/__item/cards__item.css";
+@import "../blocks/cards/__photo-sizer/cards__photo-sizer.css";
+@import "../blocks/cards/__photo/cards__photo.css";
+@import "../blocks/cards/__info/cards__info.css";
+@import "../blocks/cards/__title/cards__title.css";
+@import "../blocks/cards/__like/cards__like.css";
+/*-------------------footer-------------------------*/
+@import "../blocks/footer/footer.css";
+@import "../blocks/footer/__copyright/footer__copyright.css";
+/*-----------------------popup-------------------------*/
+@import "../blocks/popup/popup.css";
+@import "../blocks/popup/_opened/popup_opened.css";
+@import "../blocks/profile-edit-popup/__form/profile-edit-popup__form.css";
+@import "../blocks/profile-edit-popup/__title/profile-edit-popup__title.css";
+@import "../blocks/profile-edit-popup/__name/profile-edit-popup__name.css";
+@import "../blocks/profile-edit-popup/__status/profile-edit-popup__status.css";
+@import "../blocks/profile-edit-popup/__save/profile-edit-popup__save.css";
+@import "../blocks/profile-edit-popup/__close/profile-edit-popup__close.css";
+@import "../blocks/link/link.css";

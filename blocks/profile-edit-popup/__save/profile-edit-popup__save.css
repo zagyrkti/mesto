@@ -1,0 +1,23 @@
+.profile-edit-popup__save {
+  margin: 48px 0 0 0;
+  width: 100%;
+  min-height: 50px;
+
+  background-color: #000000;
+  border-radius: 2px;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 545px) {
+  .profile-edit-popup__save {
+    margin: 45px 0 0 0;
+    min-height: 46px;
+
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
