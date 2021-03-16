@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Mesto</title>
@@ -9,95 +9,98 @@
 <body class="body">
 <div class="page">
   <header class="header">
-    <a class="header__logo link" href="#" target="_self" rel="noopener"></a>
-    <div class="header__separator"></div>
+    <a class="header__logo link link_type_normal" href="#" target="_self" rel="noopener"></a>
   </header>
 
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="images/ava.jpg" alt="аватар">
+      <img class="profile__avatar" src="images/ava.jpg" alt="аватарка">
       <div class="profile__wrapper">
-      <p class="profile__name">Prakhar Kont</p>
-      <button type="button" class="profile__edit link"></button>
+        <h1 class="profile__name">Пракхар Конт</h1>
+        <button type="button" class="profile__edit link link_type_normal"></button>
       </div>
-      <p class="profile__status">Festival researcher</p>
-      <button type="button" class="profile__add link"></button>
+      <p class="profile__status">Естествоиспытатель</p>
+      <button type="button" class="profile__add link link_type_normal"></button>
     </section>
 
     <section class="content">
       <ul class="cards">
         <li class="cards__item">
+          <!--Получено добро на реалилзацию через обертку с padding bottom + absolute на картинке-->
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="./images/marketplace.jpg" alt="marketplace">
+            <img class="cards__photo" src="./images/marketplace.jpg" alt="Базар">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Marketplace</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Базар</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
         <li class="cards__item">
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="./images/lantern.jpg" alt="lanterns">
+            <img class="cards__photo" src="./images/lantern.jpg" alt="Фонарики">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Lanterns</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Фонарики</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
         <li class="cards__item">
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="./images/plates.jpg" alt="plates">
+            <img class="cards__photo" src="./images/plates.jpg" alt="Плошки">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Plates</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Плошки</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
         <li class="cards__item">
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="images/spice.jpg" alt="spice">
+            <img class="cards__photo" src="images/spice.jpg" alt="Пряности">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Spice</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Пряности</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
         <li class="cards__item">
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="./images/sweets.jpg" alt="sweets">
+            <img class="cards__photo" src="./images/windmills.jpg" alt="Вертушки">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Sweets</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Вертушки</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
         <li class="cards__item">
           <div class="cards__photo-sizer">
-            <img class="cards__photo" src="./images/windmills.jpg" alt="windmills">
+            <img class="cards__photo" src="./images/sweets_4.jpg" alt="Сладости">
           </div>
           <div class="cards__info">
-            <h2 class="cards__title">Windmills</h2>
-            <button class="cards__like"></button>
+            <p class="cards__title">Сладости</p>
+            <button type="button" class="cards__like link link_type_like"></button>
           </div>
         </li>
+
       </ul>
     </section>
   </main>
 
   <footer class="footer">
-    <p class="footer__copyright">© 2021 Alexandr M.</p>
+    <p class="footer__copyright">&copy; 2021 Alexandr M.</p>
   </footer>
 </div>
 
-<!----------------------popup block----------------------------------->
+<!--popup block-->
 
 <div class="profile-edit-popup popup">
-  <form class="profile-edit-popup__form">
+  <form class="profile-edit-popup__form" name="profile-data">
     <h2 class="profile-edit-popup__title">Редактировать профиль</h2>
-    <input type="text" class="profile-edit-popup__name" placeholder="Жак-Ив Кусто">
-    <input type="text" class="profile-edit-popup__status" placeholder="Исследователь океана">
-    <button type="submit" class="profile-edit-popup__save link">Сохранить</button>
-    <button type="button" class="profile-edit-popup__close link"></button>
+    <input type="text" name="profile-edit-popup-name"
+           class="profile-edit-popup__input profile-edit-popup__input_type_name" placeholder="Имя">
+    <input type="text" name="profile-edit-popup-status"
+           class="profile-edit-popup__input profile-edit-popup__input_type_status" placeholder="Статус">
+    <button type="submit" class="profile-edit-popup__save link link_type_save">Сохранить</button>
+    <button type="button" class="profile-edit-popup__close link link_type_normal"></button>
   </form>
 </div>
 <script src="script.js"></script>

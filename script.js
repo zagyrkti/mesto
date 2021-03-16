@@ -3,8 +3,8 @@ let profileEditPopup = document.querySelector(".profile-edit-popup");
 let profileEditPopupCloseBtn = document.querySelector(".profile-edit-popup__close");
 let profileName = document.querySelector(".profile__name");
 let profileStatus = document.querySelector(".profile__status");
-let profileEditPopupName = document.querySelector(".profile-edit-popup__name");
-let profileEditPopupStatus = document.querySelector(".profile-edit-popup__status");
+let profileEditPopupName = document.querySelector(".profile-edit-popup__input_type_name");
+let profileEditPopupStatus = document.querySelector(".profile-edit-popup__input_type_status");
 let profileEditPopupForm = document.querySelector(".profile-edit-popup__form");
 
 

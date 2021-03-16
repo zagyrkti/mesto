@@ -5,6 +5,7 @@
     grid-area: add;
     background-color: #212121;
     border: 2px solid #FFFFFF;
+    border-radius: 2px;
     background-image: url("../../../images/add.svg");
     background-repeat: no-repeat;
     background-position: center;
