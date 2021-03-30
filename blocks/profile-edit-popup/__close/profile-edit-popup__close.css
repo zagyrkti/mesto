@@ -12,6 +12,7 @@
   background-size: contain;
   border: none;
   transform: rotate(45deg);
+  outline: none;
 }
 
 @media screen and (max-width: 545px) {

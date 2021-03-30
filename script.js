@@ -27,7 +27,7 @@ function formSubmitHandler(evt) {
 
 profileEditPopupForm.addEventListener('submit', formSubmitHandler);
 
-// Initial card generation
+// Initial cards generation
 
 const initialCards = [
   {
@@ -65,3 +65,7 @@ initialCards.forEach((item) => {
   cardItem.querySelector(".cards__title").textContent = item.name;
   cardsContainer.prepend(cardItem);
 })
+
+// add card block
+
+
