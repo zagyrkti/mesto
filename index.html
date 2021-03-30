@@ -25,8 +25,8 @@
 
     <section class="content">
       <ul class="cards">
-        <li class="cards__item">
-          <!--Получено добро на реализацию через обертку с padding bottom + absolute на картинке-->
+        <!--<li class="cards__item">
+          &lt;!&ndash;Получено добро на реализацию через обертку с padding bottom + absolute на картинке&ndash;&gt;
           <div class="cards__photo-sizer">
             <img class="cards__photo" src="./images/marketplace.jpg" alt="Базар">
           </div>
@@ -79,7 +79,7 @@
             <p class="cards__title">Сладости</p>
             <button type="button" class="cards__like link link_type_like"></button>
           </div>
-        </li>
+        </li>-->
 
       </ul>
     </section>
@@ -90,8 +90,20 @@
   </footer>
 </div>
 
+<!--template block-->
+<template class="card-template">
+  <li class="cards__item">
+    <!--Получено добро на реализацию через обертку с padding bottom + absolute на картинке-->
+    <div class="cards__photo-sizer">
+      <img class="cards__photo" src="" alt="">
+    </div>
+    <div class="cards__info">
+      <p class="cards__title"></p>
+      <button type="button" class="cards__like link link_type_like"></button>
+    </div>
+  </li>
+</template>
 <!--popup block-->
-
 <div class="profile-edit-popup popup">
   <form class="profile-edit-popup__form" name="profile-data">
     <h2 class="profile-edit-popup__title">Редактировать профиль</h2>
