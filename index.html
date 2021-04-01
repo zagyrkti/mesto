@@ -103,28 +103,28 @@
     </div>
   </li>
 </template>
-<!--popup block-->
-<div class="profile-edit-popup popup">
-  <form class="profile-edit-popup__form" name="profile-data">
-    <h2 class="profile-edit-popup__title">Редактировать профиль</h2>
-    <input type="text" name="profile-edit-popup-name"
-           class="profile-edit-popup__input profile-edit-popup__input_type_name" placeholder="Имя">
-    <input type="text" name="profile-edit-popup-status"
-           class="profile-edit-popup__input profile-edit-popup__input_type_status" placeholder="Статус">
-    <button type="submit" class="profile-edit-popup__save link link_type_save">Сохранить</button>
-    <button type="button" class="profile-edit-popup__close link link_type_normal"></button>
+<!--popup-form block-->
+<div class="popup_type_profile-edit popup">
+  <form class="popup-form popup-form_type_profile-edit" name="profile-edit">
+    <h2 class="popup-form__title">Редактировать профиль</h2>
+    <input type="text" name="profile-data-name"
+           class="popup-form__input popup-form__input_type_top popup-form__input_data_profile-name" placeholder="Имя">
+    <input type="text" name="profile-data-status"
+           class="popup-form__input popup-form__input_type_normal popup-form__input_data_profile-status" placeholder="Статус">
+    <button type="submit" class="popup-form__save popup-form__save_owner_profile-edit link link_type_save">Сохранить</button>
+    <button type="button" class="popup-form__close popup-form__close_owner_profile-edit link link_type_normal"></button>
   </form>
 </div>
 
-<div class="profile-edit-popup popup">
-  <form class="profile-edit-popup__form" name="profile-data">
-    <h2 class="profile-edit-popup__title">Редактировать профиль</h2>
-    <input type="text" name="profile-edit-popup-name"
-           class="profile-edit-popup__input profile-edit-popup__input_type_name" placeholder="Имя">
-    <input type="text" name="profile-edit-popup-status"
-           class="profile-edit-popup__input profile-edit-popup__input_type_status" placeholder="Статус">
-    <button type="submit" class="profile-edit-popup__save link link_type_save">Сохранить</button>
-    <button type="button" class="profile-edit-popup__close link link_type_normal"></button>
+<div class="popup_type_add-card popup">
+  <form class="popup-form popup-form_type_add-card" name="add-card">
+    <h2 class="popup-form__title">Новое место</h2>
+    <input type="text" name="card-data-name"
+           class="popup-form__input popup-form__input_type_top popup-form__input_data_card-name" placeholder="Название">
+    <input type="text" name="card-data-link"
+           class="popup-form__input popup-form__input_type_normal popup-form__input_data_card-link" placeholder="Ссылка на картинку">
+    <button type="submit" class="popup-form__save popup-form__save_owner_add-card link link_type_save">Сохранить</button>
+    <button type="button" class="popup-form__close popup-form__close_owner_add-card link link_type_normal"></button>
   </form>
 </div>
 

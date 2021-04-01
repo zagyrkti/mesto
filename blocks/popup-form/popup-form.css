@@ -1,4 +1,4 @@
-.profile-edit-popup__form {
+.popup-form {
   position: relative;
   box-sizing: border-box;
   max-width: 430px;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 545px) {
-  .profile-edit-popup__form {
+  .popup-form {
     max-width: 282px;
     padding: 25px 22px 25px 22px;
   }

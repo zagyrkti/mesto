@@ -1,9 +1,9 @@
-.profile-edit-popup__input_type_name {
+.popup-form__input_type_top {
   margin: 47px 0 0 0;
 }
 
 @media screen and (max-width: 545px) {
-  .profile-edit-popup__input_type_name {
+  .popup-form__input_type_top {
     margin: 75px 0 0 0;
   }
 }

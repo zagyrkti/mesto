@@ -1,4 +1,4 @@
-.profile-edit-popup__close {
+.popup-form__close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 545px) {
-  .profile-edit-popup__close {
+  .popup-form__close {
     top: -45px;
     right: 5px;
     width: 26px;
