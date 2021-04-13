@@ -36,7 +36,9 @@
 @import "../blocks/popup-form/__input/_type/popup-form__input_type_top.css";
 @import "../blocks/popup-form/__input/_type/popup-form__input_type_normal.css";
 @import "../blocks/popup-form/__save/popup-form__save.css";
+@import "../blocks/popup-form/__save/_disabled/popup-form__save_disabled.css";
 @import "../blocks/popup-form/__close/popup-form__close.css";
+@import "../blocks/popup-form/__input-error/popup-form__input-error.css";
 /*-----------------other-----------------*/
 @import "../blocks/link/link.css";
 @import "../blocks/link/_type/link_type_normal.css";

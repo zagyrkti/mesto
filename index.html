@@ -50,7 +50,7 @@
   </li>
 </template>
 <!--popup-form block-->
-
+<!--figure popup-->
 <div class="popup_type_figure popup">
   <figure class="popup-figure">
     <img src="#" class="popup-figure__image" alt="#">
@@ -58,29 +58,42 @@
     <figcaption class="popup-figure__caption"></figcaption>
   </figure>
 </div>
-
+<!--profile edit popup-->
 <div class="popup_type_profile-edit popup">
   <form class="popup-form popup-form_type_profile-edit" name="profile-edit">
     <h2 class="popup-form__title">Редактировать профиль</h2>
-    <input type="text" name="profile-data-name"
-           class="popup-form__input popup-form__input_type_top popup-form__input_data_profile-name" placeholder="Имя">
-    <input type="text" name="profile-data-status"
-           class="popup-form__input popup-form__input_type_normal popup-form__input_data_profile-status"
-           placeholder="Статус">
+    <label>
+      <input type="text" name="profile-data-name" minlength="2" maxlength="40" required
+             class="popup-form__input popup-form__input_type_top popup-form__input_data_profile-name" placeholder="Имя">
+      <span class="popup-form__input-error popup-form__input-error_type_name"></span>
+    </label>
+    <label>
+      <input type="text" name="profile-data-status" minlength="2" maxlength="200" required
+             class="popup-form__input popup-form__input_type_normal popup-form__input_data_profile-status"
+             placeholder="Статус">
+      <span class="popup-form__input-error popup-form__input-error_type_status"></span>
+    </label>
     <button type="submit" class="popup-form__save popup-form__save_owner_profile-edit link link_type_save">Сохранить
     </button>
     <button type="button" class="popup-form__close popup-form__close_owner_profile-edit link link_type_normal"></button>
   </form>
 </div>
-
+<!--card add popup-->
 <div class="popup_type_add-card popup">
   <form class="popup-form popup-form_type_add-card" name="add-card">
     <h2 class="popup-form__title">Новое место</h2>
-    <input type="text" name="card-data-name"
-           class="popup-form__input popup-form__input_type_top popup-form__input_data_card-name" placeholder="Название">
-    <input type="text" name="card-data-link"
-           class="popup-form__input popup-form__input_type_normal popup-form__input_data_card-link"
-           placeholder="Ссылка на картинку">
+    <label>
+      <input type="text" name="card-data-name" minlength="2" maxlength="30" required
+             class="popup-form__input popup-form__input_type_top popup-form__input_data_card-name"
+             placeholder="Название">
+      <span class="popup-form__input-error popup-form__input-error_type_card-name"></span>
+    </label>
+    <label>
+      <input type="url" name="card-data-link" required
+             class="popup-form__input popup-form__input_type_normal popup-form__input_data_card-link"
+             placeholder="Ссылка на картинку">
+      <span class="popup-form__input-error popup-form__input-error_type_card-link"></span>
+    </label>
     <button type="submit" class="popup-form__save popup-form__save_owner_add-card link link_type_save">Сохранить
     </button>
     <button type="button" class="popup-form__close popup-form__close_owner_add-card link link_type_normal"></button>
@@ -89,5 +102,6 @@
 
 <script src="./scripts/initial-cards.js"></script>
 <script src="./scripts/script.js"></script>
+<script src="./scripts/validate.js"></script>
 </body>
 </html>

@@ -76,9 +76,9 @@ addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 
 /*fade out for popups*/
 /*used to avoid visibility hidden*/
-document.addEventListener('animationend', (e) => {
-  if (e.animationName === 'fade-out') {
-    e.target.classList.remove('popup_closed');
+document.addEventListener('animationend', (evt) => {
+  if (evt.animationName === 'fade-out') {
+    evt.target.classList.remove('popup_closed');
   }
 });
 
