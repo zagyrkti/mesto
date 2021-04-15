@@ -135,12 +135,11 @@ const figureCloseBtn = document.querySelector(".popup-figure__close");
 figureCloseBtn.addEventListener("click", () => closePopup(popupFigure))
 
 /*close by click*/
-const elementList = [...document.querySelectorAll(".popup")];
-elementList.forEach((element) => {
+const popupList = [...document.querySelectorAll(".popup")];
+popupList.forEach((element) => {
   element.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(element);
-      evt.stopPropagation();
     }
   })
 })
