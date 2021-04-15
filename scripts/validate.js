@@ -9,20 +9,31 @@ config = {
 function enableValidation (config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
-    setSubmitBtnState(formElement, config)
     formElement.addEventListener("input", (evt) => {
       const input = evt.target
-      if (!isInputValid(input)) {
-        showInputError(input);
-      } else {
-        hideInputError(input);
-      }
-      setSubmitBtnState(formElement, config)
+      validateInput(input);
+      setSubmitBtnState(formElement, config);
     });
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
   });
+}
+
+function resetValidation(formElement) {
+  const inputList = [...formElement.querySelectorAll(config.inputSelector)];
+  inputList.forEach((element) => {
+    hideInputError(element);
+  })
+  setSubmitBtnState(formElement, config);
+}
+
+function validateInput (input) {
+  if (!isInputValid(input)) {
+    showInputError(input);
+  } else {
+    hideInputError(input);
+  }
 }
 
 function isInputValid (input) {
@@ -31,7 +42,7 @@ function isInputValid (input) {
 
 function showInputError (input) {
   const errorElement = input.nextElementSibling;
-  errorElement.textContent = input.validationMessage;;
+  errorElement.textContent = input.validationMessage;
   input.classList.add(config.inputErrorClass)
 }
 
@@ -55,3 +66,4 @@ function setSubmitBtnState (formElement, config) {
 }
 
 enableValidation(config)
+

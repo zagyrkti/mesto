@@ -69,7 +69,6 @@ function addCardFormSubmitHandler(evt) {
   const card = createCard({name: addCardName.value, link: addCardLink.value});
   prependToCardsContainer(card);
   closePopup(addCardPopup);
-  addCardForm.reset();
 }
 
 
@@ -84,14 +83,16 @@ document.addEventListener('animationend', (evt) => {
 });
 
 function openPopup(element) {
+  resetValidation(element.firstElementChild);
   element.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEsc)
+  document.addEventListener("keydown", closeByEsc);
 }
 
 function closePopup(element) {
   element.classList.remove("popup_opened");
   element.classList.add("popup_closed");
   document.removeEventListener("keydown", closeByEsc)
+  element.firstElementChild.reset();
 }
 
 function createCard(cardData) {
