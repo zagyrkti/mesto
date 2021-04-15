@@ -4,4 +4,6 @@
   opacity: 0.2;
 
   color: #000000;
+  user-select: none;
+  pointer-events: none;
 }

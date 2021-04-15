@@ -3,6 +3,7 @@ const profileEditBtn = document.querySelector(".profile__edit");
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
 
+
 /*profile popup*/
 const profileEditPopup = document.querySelector(".popup_type_profile-edit");
 const profileEditPopupCloseBtn = document.querySelector(".popup-form__close_owner_profile-edit");
@@ -11,7 +12,7 @@ const profileEditPopupStatus = document.querySelector(".popup-form__input_data_p
 const profileEditForm = document.querySelector(".popup-form_type_profile-edit");
 
 /*profile popup open*/
-profileEditBtn.addEventListener("click", () => {
+profileEditBtn.addEventListener("click", (evt) => {
   /*open popup*/
   openPopup(profileEditPopup);
   /*get data from profile and paste to inputs*/
@@ -74,8 +75,8 @@ function addCardFormSubmitHandler(evt) {
 
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 
-/*fade out for popups*/
-/*used to avoid visibility hidden*/
+/*fade out for popups
+used to avoid visibility hidden*/
 document.addEventListener('animationend', (evt) => {
   if (evt.animationName === 'fade-out') {
     evt.target.classList.remove('popup_closed');
@@ -84,11 +85,13 @@ document.addEventListener('animationend', (evt) => {
 
 function openPopup(element) {
   element.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEsc)
 }
 
 function closePopup(element) {
   element.classList.remove("popup_opened");
   element.classList.add("popup_closed");
+  document.removeEventListener("keydown", closeByEsc)
 }
 
 function createCard(cardData) {
@@ -129,3 +132,21 @@ function prependToCardsContainer(cardItem) {
 /* close photo figure*/
 const figureCloseBtn = document.querySelector(".popup-figure__close");
 figureCloseBtn.addEventListener("click", () => closePopup(popupFigure))
+
+/*close by click*/
+const elementList = [...document.querySelectorAll(".popup")];
+elementList.forEach((element) => {
+  element.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(element);
+      evt.stopPropagation();
+    }
+  })
+})
+
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup_opened")
+    closePopup(popup)
+  }
+}
