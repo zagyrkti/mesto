@@ -1,8 +1,8 @@
-## Project 4: Mesto
+## Project 4-6: Mesto
 
 Tech: Html, Css, JavaScript 
 
-Purpose: DOM training project
+Purpose: DOM, modals, functions, objects, form validation training project
 
 [GitHub Pages](https://zagyrkti.github.io/mesto/)
 

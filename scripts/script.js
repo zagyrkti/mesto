@@ -83,7 +83,7 @@ document.addEventListener('animationend', (evt) => {
 });
 
 function openPopup(element) {
-  resetValidation(element.firstElementChild);
+  resetValidation(element);
   element.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
 }
@@ -91,8 +91,8 @@ function openPopup(element) {
 function closePopup(element) {
   element.classList.remove("popup_opened");
   element.classList.add("popup_closed");
-  document.removeEventListener("keydown", closeByEsc)
-  element.firstElementChild.reset();
+  document.removeEventListener("keydown", closeByEsc);
+  resetForm(element);
 }
 
 function createCard(cardData) {
@@ -137,7 +137,8 @@ figureCloseBtn.addEventListener("click", () => closePopup(popupFigure))
 /*close by click*/
 const popupList = [...document.querySelectorAll(".popup")];
 popupList.forEach((element) => {
-  element.addEventListener("click", (evt) => {
+  /*mousedown for UX\click slip*/
+  element.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(element);
     }
@@ -150,3 +151,13 @@ function closeByEsc(evt) {
     closePopup(popup)
   }
 }
+
+function resetForm(element) {
+  const firstElementChild = element.firstElementChild;
+  /*check if firstElementChild is form*/
+  if (firstElementChild && firstElementChild.classList.contains("popup-form")) {
+    firstElementChild.reset();
+  }
+}
+
+

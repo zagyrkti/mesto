@@ -6,7 +6,7 @@ config = {
   inputErrorClass: 'popup-form__input_type_error',
 };
 
-function enableValidation (config) {
+function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("input", (evt) => {
@@ -20,15 +20,7 @@ function enableValidation (config) {
   });
 }
 
-function resetValidation(formElement) {
-  const inputList = [...formElement.querySelectorAll(config.inputSelector)];
-  inputList.forEach((element) => {
-    hideInputError(element);
-  })
-  setSubmitBtnState(formElement, config);
-}
-
-function validateInput (input) {
+function validateInput(input) {
   if (!isInputValid(input)) {
     showInputError(input);
   } else {
@@ -36,23 +28,35 @@ function validateInput (input) {
   }
 }
 
-function isInputValid (input) {
+function isInputValid(input) {
   return input.validity.valid
 }
 
-function showInputError (input) {
+function showInputError(input) {
   const errorElement = input.nextElementSibling;
   errorElement.textContent = input.validationMessage;
   input.classList.add(config.inputErrorClass)
 }
 
-function hideInputError (input) {
+function hideInputError(input) {
   const errorElement = input.nextElementSibling;
   errorElement.textContent = "";
   input.classList.remove(config.inputErrorClass)
 }
 
-function setSubmitBtnState (formElement, config) {
+function resetValidation(element) {
+  const firstElementChild = element.firstElementChild;
+  /*check if firstElementChild is form*/
+  if (firstElementChild && firstElementChild.classList.contains("popup-form")) {
+    const inputList = [...firstElementChild.querySelectorAll(config.inputSelector)];
+    inputList.forEach((element) => {
+      hideInputError(element);
+    })
+    setSubmitBtnState(firstElementChild, config);
+  }
+}
+
+function setSubmitBtnState(formElement, config) {
   const submitBtn = formElement.querySelector(config.submitButtonSelector)
   const inputList = [...formElement.querySelectorAll(config.inputSelector)]
   const allInputsValid = inputList.every((input) => {
