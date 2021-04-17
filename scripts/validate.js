@@ -9,6 +9,7 @@ config = {
 function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
+    setSubmitBtnState(formElement, config);
     formElement.addEventListener("input", (evt) => {
       const input = evt.target
       validateInput(input);

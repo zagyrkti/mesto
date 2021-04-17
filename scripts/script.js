@@ -12,9 +12,9 @@ const profileEditPopupStatus = document.querySelector(".popup-form__input_data_p
 const profileEditForm = document.querySelector(".popup-form_type_profile-edit");
 
 /*profile popup open*/
-profileEditBtn.addEventListener("click", (evt) => {
+profileEditBtn.addEventListener("click", () => {
   /*open popup*/
-  openPopup(profileEditPopup);
+  openPopupForm(profileEditPopup)
   /*get data from profile and paste to inputs*/
   profileEditPopupName.value = profileName.textContent;
   profileEditPopupStatus.value = profileStatus.textContent;
@@ -52,7 +52,7 @@ const addCardBtn = document.querySelector(".profile__add");
 const addCardPopup = document.querySelector(".popup_type_add-card");
 
 /*add card popup open*/
-addCardBtn.addEventListener("click", () => openPopup(addCardPopup))
+addCardBtn.addEventListener("click", () => openPopupForm(addCardPopup));
 
 /*add card popup close*/
 const addCardCloseBtn = document.querySelector(".popup-form__close_owner_add-card");
@@ -74,6 +74,25 @@ function addCardFormSubmitHandler(evt) {
 
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 
+function openPopup(element) {
+  element.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEsc);
+}
+
+function closePopup(element) {
+  element.classList.remove("popup_opened");
+  /*Здравствуйте, куратор написала что у вас там весело ), спасибо за оперативный фидбек, дедлайн близко )*/
+
+  /*popup_closed использовал так для повышения accessibility, сделана нестандартная реализация*/
+  /*не через visibility a через display: none -> display: flex и анимацию*/
+  /*так как плавное закрытие в этом случае сделать сложнее используется popup_closed*/
+  /*на классе висит анимация fade out, плавное закрытие*/
+  /*класс удаляется после запуска анимации fade out в обработчике анимации - 101 строка*/
+  /*перенес поближе, извиняюсь за хреновую структуру*/
+  element.classList.add("popup_closed");
+  document.removeEventListener("keydown", closeByEsc);
+}
+
 /*fade out for popups
 used to avoid visibility hidden*/
 document.addEventListener('animationend', (evt) => {
@@ -82,26 +101,13 @@ document.addEventListener('animationend', (evt) => {
   }
 });
 
-function openPopup(element) {
-  resetValidation(element);
-  element.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEsc);
-}
-
-function closePopup(element) {
-  element.classList.remove("popup_opened");
-  element.classList.add("popup_closed");
-  document.removeEventListener("keydown", closeByEsc);
-  resetForm(element);
-}
-
 function createCard(cardData) {
   /*clone template*/
   const cardItem = cardTemplate.querySelector(".cards__item").cloneNode(true);
-
+  const cardPhoto = cardItem.querySelector(".cards__photo");
   /*get data from parameter object and pass it to elements properties  */
-  cardItem.querySelector(".cards__photo").src = cardData.link;
-  cardItem.querySelector(".cards__photo").alt = cardData.name;
+  cardPhoto.src = cardData.link;
+  cardPhoto.alt = cardData.name;
   cardItem.querySelector(".cards__title").textContent = cardData.name;
 
   /*card delete*/
@@ -115,11 +121,12 @@ function createCard(cardData) {
   })
 
   /*fullscreen photo by click on card's img*/
-  cardItem.querySelector(".cards__photo").addEventListener("click", () => {
+  cardPhoto.addEventListener("click", () => {
     /*open figure popup*/
     openPopup(popupFigure);
     /*get image data pass to figure*/
-    popupFigureImg.src = cardItem.querySelector(".cards__photo").src;
+    popupFigureImg.src = cardPhoto.src;
+    popupFigureImg.alt = cardPhoto.alt;
     figCaption.textContent = cardItem.querySelector(".cards__title").textContent;
   })
 
@@ -152,12 +159,16 @@ function closeByEsc(evt) {
   }
 }
 
-function resetForm(element) {
-  const firstElementChild = element.firstElementChild;
+function resetForm(popupElement) {
+  const firstElementChild = popupElement.firstElementChild;
   /*check if firstElementChild is form*/
   if (firstElementChild && firstElementChild.classList.contains("popup-form")) {
     firstElementChild.reset();
   }
 }
 
-
+function openPopupForm(element) {
+  resetForm(element);
+  resetValidation(element);
+  openPopup(element)
+}
