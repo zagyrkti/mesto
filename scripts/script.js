@@ -82,12 +82,11 @@ function openPopup(element) {
 function closePopup(element) {
   element.classList.remove("popup_opened");
   /*Здравствуйте, куратор написала что у вас там весело ), спасибо за оперативный фидбек, дедлайн близко )*/
-
   /*popup_closed использовал так для повышения accessibility, сделана нестандартная реализация*/
   /*не через visibility a через display: none -> display: flex и анимацию*/
   /*так как плавное закрытие в этом случае сделать сложнее используется popup_closed*/
   /*на классе висит анимация fade out, плавное закрытие*/
-  /*класс удаляется после запуска анимации fade out в обработчике анимации - 101 строка*/
+  /*popup_closed удаляется после запуска анимации fade out в обработчике анимации - 101 строка*/
   /*перенес поближе, извиняюсь за хреновую структуру*/
   element.classList.add("popup_closed");
   document.removeEventListener("keydown", closeByEsc);
