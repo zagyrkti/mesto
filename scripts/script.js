@@ -86,7 +86,7 @@ function closePopup(element) {
   /*не через visibility a через display: none -> display: flex и анимацию*/
   /*так как плавное закрытие в этом случае сделать сложнее используется popup_closed*/
   /*на классе висит анимация fade out, плавное закрытие*/
-  /*popup_closed удаляется после запуска анимации fade out в обработчике анимации - 101 строка*/
+  /*popup_closed удаляется после запуска анимации fade out в обработчике анимации - 99 строка*/
   /*перенес поближе, извиняюсь за хреновую структуру*/
   element.classList.add("popup_closed");
   document.removeEventListener("keydown", closeByEsc);
