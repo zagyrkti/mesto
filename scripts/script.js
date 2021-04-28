@@ -1,6 +1,15 @@
 import {Card} from "./Card.js";
 import {initialCards} from "./initial-cards.js";
-import {resetValidation} from "./validate.js";
+import {FormValidator} from "./FormValidator.js";
+
+const selectorConfig = {
+  formSelector: '.popup-form',
+  inputSelector: '.popup-form__input',
+  submitButtonSelector: '.popup-form__save',
+  inactiveButtonClass: 'popup-form__save_disabled',
+  inputErrorClass: 'popup-form__input_type_error',
+};
+
 /*profile section*/
 const profileEditBtn = document.querySelector(".profile__edit");
 const profileName = document.querySelector(".profile__name");
@@ -14,10 +23,14 @@ const profileEditPopupName = document.querySelector(".popup-form__input_data_pro
 const profileEditPopupStatus = document.querySelector(".popup-form__input_data_profile-status");
 const profileEditForm = document.querySelector(".popup-form_type_profile-edit");
 
+const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
+profileEditFormValidator.enableValidation()
+
 /*profile popup open*/
 profileEditBtn.addEventListener("click", () => {
   /*open popup*/
   openPopupForm(profileEditPopup)
+  profileEditFormValidator.resetValidation()
   /*get data from profile and paste to inputs*/
   profileEditPopupName.value = profileName.textContent;
   profileEditPopupStatus.value = profileStatus.textContent;
@@ -38,17 +51,12 @@ function profileFormSubmitHandler(evt) {
 
 profileEditForm.addEventListener('submit', profileFormSubmitHandler)
 
-const cardTemplate = document.querySelector(".card-template").content;
 const cardsContainer = document.querySelector(".cards");
 
 const popupFigure = document.querySelector(".popup_type_figure");
 const popupFigureImg = document.querySelector(".popup-figure__image");
 const figCaption = document.querySelector(".popup-figure__caption");
 
-/*generator of initial cards*/
-/*initialCards.forEach((item) => {
-  prependToCardsContainer(createCard(item));
-})*/
 
 initialCards.forEach((itemData) => {
   prependToCardsContainer(new Card(itemData, ".card-template", handleCardClick).createCard());
@@ -57,23 +65,31 @@ initialCards.forEach((itemData) => {
 /* add card block*/
 const addCardBtn = document.querySelector(".profile__add");
 const addCardPopup = document.querySelector(".popup_type_add-card");
+const addCardForm = document.querySelector(".popup-form_type_add-card");
+
+const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
+addCardFormValidator.enableValidation()
 
 /*add card popup open*/
-addCardBtn.addEventListener("click", () => openPopupForm(addCardPopup));
+addCardBtn.addEventListener("click", () => {
+  openPopupForm(addCardPopup)
+  addCardFormValidator.resetValidation()
+});
 
 /*add card popup close*/
 const addCardCloseBtn = document.querySelector(".popup-form__close_owner_add-card");
 addCardCloseBtn.addEventListener("click", () => closePopup(addCardPopup))
 
 /*add card form elements*/
-const addCardForm = document.querySelector(".popup-form_type_add-card");
+
 const addCardName = document.querySelector(".popup-form__input_data_card-name");
 const addCardLink = document.querySelector(".popup-form__input_data_card-link");
 
 /*actions on add card form submit*/
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const card = createCard({name: addCardName.value, link: addCardLink.value});
+  const itemData = {name: addCardName.value, link: addCardLink.value}
+  const card = new Card(itemData, ".card-template", handleCardClick).createCard()
   prependToCardsContainer(card);
   closePopup(addCardPopup);
 }
@@ -88,13 +104,6 @@ function openPopup(element) {
 
 function closePopup(element) {
   element.classList.remove("popup_opened");
-  /*Здравствуйте, куратор написала что у вас там весело ), спасибо за оперативный фидбек, дедлайн близко )*/
-  /*popup_closed использовал так для повышения accessibility, сделана нестандартная реализация*/
-  /*не через visibility a через display: none -> display: flex и анимацию*/
-  /*так как плавное закрытие в этом случае сделать сложнее используется popup_closed*/
-  /*на классе висит анимация fade out, плавное закрытие*/
-  /*popup_closed удаляется после запуска анимации fade out в обработчике анимации - 99 строка*/
-  /*перенес поближе, извиняюсь за хреновую структуру*/
   element.classList.add("popup_closed");
   document.removeEventListener("keydown", closeByEsc);
 }
@@ -107,37 +116,7 @@ document.addEventListener('animationend', (evt) => {
   }
 });
 
-/*function createCard(cardData) {
-  /!*clone template*!/
-  const cardItem = cardTemplate.querySelector(".cards__item").cloneNode(true);
-  const cardPhoto = cardItem.querySelector(".cards__photo");
-  /!*get data from parameter object and pass it to elements properties  *!/
-  cardPhoto.src = cardData.link;
-  cardPhoto.alt = cardData.name;
-  cardItem.querySelector(".cards__title").textContent = cardData.name;
 
-  /!*card delete*!/
-  const cardsDeleteBtn = cardItem.querySelector(".cards__delete");
-  cardsDeleteBtn.addEventListener("click", () => cardItem.remove())
-
-  /!*card like*!/
-  const cardLikeBtn = cardItem.querySelector(".cards__like");
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("cards__like_clicked");
-  })
-
-  /!*fullscreen photo by click on card's img*!/
-  cardPhoto.addEventListener("click", () => {
-    /!*open figure popup*!/
-    openPopup(popupFigure);
-    /!*get image data pass to figure*!/
-    popupFigureImg.src = cardPhoto.src;
-    popupFigureImg.alt = cardPhoto.alt;
-    figCaption.textContent = cardItem.querySelector(".cards__title").textContent;
-  })
-
-  return cardItem;
-}*/
 
 function prependToCardsContainer(cardItem) {
   cardsContainer.prepend(cardItem);
@@ -165,6 +144,8 @@ function closeByEsc(evt) {
   }
 }
 
+
+
 function resetForm(popupElement) {
   const firstElementChild = popupElement.firstElementChild;
   /*check if firstElementChild is form*/
@@ -175,7 +156,6 @@ function resetForm(popupElement) {
 
 function openPopupForm(element) {
   resetForm(element);
-  resetValidation(element);
   openPopup(element)
 }
 
