@@ -1,4 +1,6 @@
-config = {
+export {resetValidation}
+
+const config = {
   formSelector: '.popup-form',
   inputSelector: '.popup-form__input',
   submitButtonSelector: '.popup-form__save',

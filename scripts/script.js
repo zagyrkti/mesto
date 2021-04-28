@@ -1,3 +1,6 @@
+import {Card} from "./Card.js";
+import {initialCards} from "./initial-cards.js";
+import {resetValidation} from "./validate.js";
 /*profile section*/
 const profileEditBtn = document.querySelector(".profile__edit");
 const profileName = document.querySelector(".profile__name");
@@ -43,8 +46,12 @@ const popupFigureImg = document.querySelector(".popup-figure__image");
 const figCaption = document.querySelector(".popup-figure__caption");
 
 /*generator of initial cards*/
-initialCards.forEach((item) => {
+/*initialCards.forEach((item) => {
   prependToCardsContainer(createCard(item));
+})*/
+
+initialCards.forEach((itemData) => {
+  prependToCardsContainer(new Card(itemData, ".card-template", handleCardClick).createCard());
 })
 
 /* add card block*/
@@ -100,37 +107,37 @@ document.addEventListener('animationend', (evt) => {
   }
 });
 
-function createCard(cardData) {
-  /*clone template*/
+/*function createCard(cardData) {
+  /!*clone template*!/
   const cardItem = cardTemplate.querySelector(".cards__item").cloneNode(true);
   const cardPhoto = cardItem.querySelector(".cards__photo");
-  /*get data from parameter object and pass it to elements properties  */
+  /!*get data from parameter object and pass it to elements properties  *!/
   cardPhoto.src = cardData.link;
   cardPhoto.alt = cardData.name;
   cardItem.querySelector(".cards__title").textContent = cardData.name;
 
-  /*card delete*/
+  /!*card delete*!/
   const cardsDeleteBtn = cardItem.querySelector(".cards__delete");
   cardsDeleteBtn.addEventListener("click", () => cardItem.remove())
 
-  /*card like*/
+  /!*card like*!/
   const cardLikeBtn = cardItem.querySelector(".cards__like");
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("cards__like_clicked");
   })
 
-  /*fullscreen photo by click on card's img*/
+  /!*fullscreen photo by click on card's img*!/
   cardPhoto.addEventListener("click", () => {
-    /*open figure popup*/
+    /!*open figure popup*!/
     openPopup(popupFigure);
-    /*get image data pass to figure*/
+    /!*get image data pass to figure*!/
     popupFigureImg.src = cardPhoto.src;
     popupFigureImg.alt = cardPhoto.alt;
     figCaption.textContent = cardItem.querySelector(".cards__title").textContent;
   })
 
   return cardItem;
-}
+}*/
 
 function prependToCardsContainer(cardItem) {
   cardsContainer.prepend(cardItem);
@@ -170,4 +177,12 @@ function openPopupForm(element) {
   resetForm(element);
   resetValidation(element);
   openPopup(element)
+}
+
+function handleCardClick (cardPhoto, cardTitle) {
+  openPopup(popupFigure);
+  /*get image data pass to figure*/
+  popupFigureImg.src = cardPhoto.src;
+  popupFigureImg.alt = cardPhoto.alt;
+  figCaption.textContent = cardTitle.textContent;
 }
