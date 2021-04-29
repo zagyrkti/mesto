@@ -1,5 +1,3 @@
-export {FormValidator}
-
 class FormValidator {
   constructor(selectorConfig, form) {
     this._selectorConfig = selectorConfig;
@@ -7,15 +5,15 @@ class FormValidator {
   }
 
   enableValidation() {
-      this._setSubmitBtnState();
-      this._form.addEventListener("input", (evt) => {
-        const input = evt.target
-        this._validateInput(input);
-        this._setSubmitBtnState(this._form, this._selectorConfig);
-      });
-      this._form.addEventListener('submit', function (evt) {
-        evt.preventDefault();
-      });
+    this._setSubmitBtnState();
+    this._form.addEventListener("input", (evt) => {
+      const input = evt.target
+      this._validateInput(input);
+      this._setSubmitBtnState(this._form, this._selectorConfig);
+    });
+    this._form.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
   }
 
   _validateInput(input) {
@@ -48,7 +46,6 @@ class FormValidator {
     inputList.forEach((element) => {
       this._hideInputError(element);
     })
-
   }
 
   _setSubmitBtnState() {
@@ -65,3 +62,5 @@ class FormValidator {
   }
 
 }
+
+export {FormValidator}

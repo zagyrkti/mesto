@@ -1,5 +1,3 @@
-export {Card};
-
 class Card {
   constructor(itemData, templateSelector, handleCardClick) {
     this._data = itemData;
@@ -15,34 +13,42 @@ class Card {
   }
 
   createCard() {
-    /*clone template*/
-    const cardItem = document.querySelector(this._templateSelector).content.firstElementChild.cloneNode(true);
-    const cardPhoto = cardItem.querySelector(this._selectorConfig.cardPhoto);
-    const cardTitle = cardItem.querySelector(this._selectorConfig.cardTitle);
+    this._getElements()
+    this._fillCard();
+    this._setEventListeners();
+    return this._cardItem;
+  }
+
+  _getElements() {
+    this._cardItem = document.querySelector(this._templateSelector).content.firstElementChild.cloneNode(true);
+    this._cardPhoto = this._cardItem.querySelector(this._selectorConfig.cardPhoto);
+    this._cardTitle = this._cardItem.querySelector(this._selectorConfig.cardTitle);
+    this._cardsDeleteBtn = this._cardItem.querySelector(this._selectorConfig.cardsDeleteBtn);
+    this._cardLikeBtn = this._cardItem.querySelector(this._selectorConfig.cardLikeBtn);
+  }
+
+  _fillCard() {
     /*get data from parameter object and pass it to elements properties  */
-    cardPhoto.src = this._data.link;
-    cardPhoto.alt = this._data.name;
-    cardTitle.textContent = this._data.name;
+    this._cardPhoto.src = this._data.link;
+    this._cardPhoto.alt = this._data.name;
+    this._cardTitle.textContent = this._data.name;
+  }
 
-    /*card delete*/
-    const cardsDeleteBtn = cardItem.querySelector(this._selectorConfig.cardsDeleteBtn);
-    cardsDeleteBtn.addEventListener("click", () => cardItem.remove())
-
-    /*card like*/
-    const cardLikeBtn = cardItem.querySelector(this._selectorConfig.cardLikeBtn);
-    cardLikeBtn.addEventListener("click", () => {
-      cardLikeBtn.classList.toggle(this._selectorConfig.cardsLikeClicked);
-    })
-
+  _setEventListeners() {
     /*fullscreen photo by click on card's img*/
-    cardPhoto.addEventListener("click", () => {
-      this._handleCardClick(cardPhoto, cardTitle)
+    this._cardPhoto.addEventListener("click", () => {
+      this._handleCardClick(this._cardPhoto, this._cardTitle)
     })
-
-    return cardItem;
+    /*delete Card*/
+    this._cardsDeleteBtn.addEventListener("click", () => this._cardItem.remove())
+    /*like*/
+    this._cardLikeBtn.addEventListener("click", () => {
+      this._cardLikeBtn.classList.toggle(this._selectorConfig.cardsLikeClicked);
+    })
   }
 }
 
+export {Card};
 
 
 
