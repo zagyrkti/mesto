@@ -40,7 +40,10 @@ class Card {
       this._handleCardClick(this._cardPhoto, this._cardTitle)
     })
     /*delete Card*/
-    this._cardsDeleteBtn.addEventListener("click", () => this._cardItem.remove())
+    this._cardsDeleteBtn.addEventListener("click", () => {
+      this._cardItem.remove()
+      this._cardItem = null;
+    })
     /*like*/
     this._cardLikeBtn.addEventListener("click", () => {
       this._cardLikeBtn.classList.toggle(this._selectorConfig.cardsLikeClicked);
