@@ -1,23 +1,21 @@
 export class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
-    this._popupElement = document.querySelector(this._popupSelector);
+    this._popupElement = document.querySelector(popupSelector);
     this._closeBtn = this._popupElement.querySelector(".popup__close")
-    this._closeByEscBinded = this._closeByEsc.bind(this)
   }
 
   open() {
     this._popupElement.classList.add("popup_opened");
-    document.addEventListener("keydown", this._closeByEscBinded);
+    document.addEventListener("keydown", this._closeByEsc);
   }
 
   close() {
     this._popupElement.classList.remove("popup_opened");
     this._popupElement.classList.add("popup_closed");
-    document.removeEventListener("keydown", this._closeByEscBinded);
+    document.removeEventListener("keydown", this._closeByEsc);
   }
 
-  _closeByEsc(evt) {
+  _closeByEsc = (evt) =>  {
     if (evt.key === "Escape") {
       this.close()
     }

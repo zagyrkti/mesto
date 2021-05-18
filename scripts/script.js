@@ -3,6 +3,7 @@ import {initialCards} from "./initial-cards.js";
 import {FormValidator} from "./FormValidator.js";
 import {Popup} from "./Popup.js";
 import {PopupWithImage} from "./PopupWithImage.js";
+import {PopupWithForm} from "./PopupWithForm.js";
 
 const selectorConfig = {
   formSelector: '.popup-form',
@@ -15,8 +16,8 @@ const selectorConfig = {
 /*------------------Elements------------------*/
 /*test*/
 /*TODO delete*/
-const profilePopupCE = new Popup(".popup_type_profile-edit");
-const addCardPopupCE = new Popup(".popup_type_add-card");
+const profilePopupCE = new PopupWithForm(".popup_type_profile-edit", handleProfileFormSubmit);
+const addCardPopupCE = new PopupWithForm(".popup_type_add-card", handleAddCardFormSubmit);
 const figurePopupCE = new PopupWithImage(".popup_type_figure");
 
 /*test*/
@@ -182,5 +183,5 @@ profileEditFormValidator.enableValidation()
 /*------------------render------------------*/
 
 initialCards.forEach((itemData) => {
-  prependToCardsContainer(new Card(itemData, ".card-template", figurePopupCE.open.bind(figurePopupCE)).createCard());
+  prependToCardsContainer(new Card(itemData, ".card-template", figurePopupCE.open).createCard());
 })
