@@ -1,3 +1,4 @@
+
 class Card {
   constructor(itemData, templateSelector, handleCardClick) {
     this._data = itemData;

@@ -2,6 +2,7 @@ import {Card} from "./Card.js";
 import {initialCards} from "./initial-cards.js";
 import {FormValidator} from "./FormValidator.js";
 import {Popup} from "./Popup.js";
+import {PopupWithImage} from "./PopupWithImage.js";
 
 const selectorConfig = {
   formSelector: '.popup-form',
@@ -16,7 +17,7 @@ const selectorConfig = {
 /*TODO delete*/
 const profilePopupCE = new Popup(".popup_type_profile-edit");
 const addCardPopupCE = new Popup(".popup_type_add-card");
-const figurePopupCE = new Popup(".popup_type_figure");
+const figurePopupCE = new PopupWithImage(".popup_type_figure");
 
 /*test*/
 
@@ -101,17 +102,18 @@ function resetForm(popupElement) {
   }
 }
 
+/*
 function openPopupForm(element) {
   resetForm(element);
-  /*openPopup(element)*/
-}
+  openPopup(element)
+}*/
 
 function handleCardClick (cardPhoto, cardTitle) {
-  figurePopupCE.open();
+  figurePopupCE.open(cardPhoto, cardTitle);
   /*get image data pass to figure*/
-  popupFigureImg.src = cardPhoto.src;
+  /*popupFigureImg.src = cardPhoto.src;
   popupFigureImg.alt = cardPhoto.alt;
-  figCaption.textContent = cardTitle.textContent;
+  figCaption.textContent = cardTitle.textContent;*/
 }
 
 /*------------------event listeners------------------*/
@@ -180,5 +182,5 @@ profileEditFormValidator.enableValidation()
 /*------------------render------------------*/
 
 initialCards.forEach((itemData) => {
-  prependToCardsContainer(new Card(itemData, ".card-template", handleCardClick).createCard());
+  prependToCardsContainer(new Card(itemData, ".card-template", figurePopupCE.open.bind(figurePopupCE)).createCard());
 })
