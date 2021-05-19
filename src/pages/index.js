@@ -11,15 +11,9 @@ import {
   profileEditForm,
   addCardBtn,
   addCardForm,
+  selectorConfig,
 } from "../utils/constants.js";
 
-const selectorConfig = {
-  formSelector: '.popup-form',
-  inputSelector: '.popup-form__input',
-  submitButtonSelector: '.popup-form__save',
-  inactiveButtonClass: 'popup-form__save_disabled',
-  inputErrorClass: 'popup-form__input_type_error',
-};
 
 /*------------------Classes-----------------*/
 
