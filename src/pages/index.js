@@ -1,10 +1,17 @@
-import {Card} from "./Card.js";
-import {initialCards} from "./initial-cards.js";
-import {FormValidator} from "./FormValidator.js";
-import {PopupWithImage} from "./PopupWithImage.js";
-import {PopupWithForm} from "./PopupWithForm.js";
-import {UserInfo} from "./UserInfo.js";
-import {Section} from "./Section.js";
+import './index.css';
+import {Card} from "../components/Card.js";
+import {initialCards} from "../utils/initial-cards.js";
+import {FormValidator} from "../components/FormValidator.js";
+import {PopupWithImage} from "../components/PopupWithImage.js";
+import {PopupWithForm} from "../components/PopupWithForm.js";
+import {UserInfo} from "../components/UserInfo.js";
+import {Section} from "../components/Section.js";
+import {
+  profileEditBtn,
+  profileEditForm,
+  addCardBtn,
+  addCardForm,
+} from "../utils/constants.js";
 
 const selectorConfig = {
   formSelector: '.popup-form',
@@ -14,21 +21,6 @@ const selectorConfig = {
   inputErrorClass: 'popup-form__input_type_error',
 };
 
-/*------------------Elements------------------*/
-
-const profileEditBtn = document.querySelector(".profile__edit");
-
-const profileEditForm = document.querySelector(".popup-form_type_profile-edit");
-
-const addCardBtn = document.querySelector(".profile__add");
-
-const addCardForm = document.querySelector(".popup-form_type_add-card");
-
-const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
-
-const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
-
-
 /*------------------Classes-----------------*/
 
 const profilePopupCE = new PopupWithForm(".popup_type_profile-edit", handleProfileFormSubmit);
@@ -36,6 +28,9 @@ const addCardPopupCE = new PopupWithForm(".popup_type_add-card", handleAddCardFo
 const figurePopupCE = new PopupWithImage(".popup_type_figure");
 const profile = new UserInfo(".profile__name", ".profile__status");
 const section = new Section({itemsData: initialCards, renderer: renderer}, ".cards");
+
+const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
+const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
 
 /*------------------functions------------------*/
 
