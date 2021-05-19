@@ -4,6 +4,7 @@ import {FormValidator} from "./FormValidator.js";
 import {PopupWithImage} from "./PopupWithImage.js";
 import {PopupWithForm} from "./PopupWithForm.js";
 import {UserInfo} from "./UserInfo.js";
+import {Section} from "./Section.js";
 
 const selectorConfig = {
   formSelector: '.popup-form',
@@ -20,7 +21,17 @@ const profilePopupCE = new PopupWithForm(".popup_type_profile-edit", handleProfi
 const addCardPopupCE = new PopupWithForm(".popup_type_add-card", handleAddCardFormSubmit);
 const figurePopupCE = new PopupWithImage(".popup_type_figure");
 const profile = new UserInfo(".profile__name", ".profile__status");
+const section = new Section({itemsData: initialCards, renderer: renderer}, ".cards");
 /*test*/
+
+function renderer(itemsData) {
+  itemsData.forEach((itemData) => {
+    const card = new Card(itemData, ".card-template", figurePopupCE.open).createCard()
+    section.addItems(card);
+  })
+}
+
+section.renderItems();
 
 /*profile section*/
 const profileEditBtn = document.querySelector(".profile__edit");
@@ -187,6 +198,3 @@ profileEditFormValidator.enableValidation()
 
 /*------------------render------------------*/
 
-initialCards.forEach((itemData) => {
-  prependToCardsContainer(new Card(itemData, ".card-template", figurePopupCE.open).createCard());
-})
