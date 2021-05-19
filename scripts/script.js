@@ -83,7 +83,7 @@ function handleAddCardFormSubmit(evt, {name, link}) {
   evt.preventDefault();
   const itemData = {name: name, link: link}
   const card = new Card(itemData, ".card-template", figurePopupCE.open).createCard()
-  prependToCardsContainer(card);
+  section.addItems(card);
   addCardPopupCE.close();
 }
 
