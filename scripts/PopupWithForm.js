@@ -23,6 +23,18 @@ export class PopupWithForm extends Popup {
     return inputData
   }
 
+  setInputValues(data) {
+    const inputs = {};
+    this._inputList.forEach((input) => {
+      inputs[input.name] = input;
+    })
+    for (let key in data) {
+      if (inputs[key]) {
+        inputs[key].value = data[key];
+      }
+    }
+  }
+
   close() {
     this._formElement.reset();
     super.close();

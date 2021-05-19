@@ -3,6 +3,7 @@ import {initialCards} from "./initial-cards.js";
 import {FormValidator} from "./FormValidator.js";
 import {PopupWithImage} from "./PopupWithImage.js";
 import {PopupWithForm} from "./PopupWithForm.js";
+import {UserInfo} from "./UserInfo.js";
 
 const selectorConfig = {
   formSelector: '.popup-form',
@@ -18,13 +19,13 @@ const selectorConfig = {
 const profilePopupCE = new PopupWithForm(".popup_type_profile-edit", handleProfileFormSubmit);
 const addCardPopupCE = new PopupWithForm(".popup_type_add-card", handleAddCardFormSubmit);
 const figurePopupCE = new PopupWithImage(".popup_type_figure");
-
+const profile = new UserInfo(".profile__name", ".profile__status");
 /*test*/
 
 /*profile section*/
 const profileEditBtn = document.querySelector(".profile__edit");
-const profileName = document.querySelector(".profile__name");
-const profileStatus = document.querySelector(".profile__status");
+/*const profileName = document.querySelector(".profile__name");
+const profileStatus = document.querySelector(".profile__status");*/
 /*profile popup*/
 /*const profileEditPopup = document.querySelector(".popup_type_profile-edit");
 const profileEditPopupCloseBtn = document.querySelector(".popup-form__close_owner_profile-edit");*/
@@ -52,13 +53,16 @@ const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
 
 const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
 
+
+
 /*------------------functions------------------*/
 
 function handleProfileFormSubmit(evt, {name, status}) {
   evt.preventDefault();
   /*paste info from inputs to profile section*/
-  profileName.textContent = name;
-  profileStatus.textContent = status;
+  profile.setUserInfo(name, status)
+/*  profileName.textContent = name;
+  profileStatus.textContent = status;*/
   /*close popup*/
   profilePopupCE.close();
 }
@@ -125,9 +129,11 @@ profileEditBtn.addEventListener("click", () => {
   profilePopupCE.open();
   /*openPopupForm(profileEditPopup)*/
   profileEditFormValidator.resetValidation()
+  const userData = profile.getUserInfo()
+  profilePopupCE.setInputValues(userData)
   /*get data from profile and paste to inputs*/
-  profileEditPopupName.value = profileName.textContent;
-  profileEditPopupStatus.value = profileStatus.textContent;
+/*  profileEditPopupName.value = userData.name;
+  profileEditPopupStatus.value = userData.status;*/
 })
 
 /*profile popup close*/
