@@ -1,4 +1,4 @@
-export {initialCards}
+
 const sweets = new URL('../images/sweets_4.jpg', import.meta.url);
 const windmills = new URL("../images/windmills.jpg", import.meta.url);
 const spice = new URL("../images/spice.jpg", import.meta.url)
@@ -32,3 +32,5 @@ const initialCards = [
         link: marketplace
     },
 ];
+
+export {initialCards}

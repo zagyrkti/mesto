@@ -12,16 +12,20 @@ import {
   addCardBtn,
   addCardForm,
   selectorConfig,
+  popupSelectors,
+  cardTemplateSelector,
+  profileSelectors,
+  cardsContainerSelector,
 } from "../utils/constants.js";
 
 
 /*------------------Classes-----------------*/
 
-const profilePopupCE = new PopupWithForm(".popup_type_profile-edit", handleProfileFormSubmit);
-const addCardPopupCE = new PopupWithForm(".popup_type_add-card", handleAddCardFormSubmit);
-const figurePopupCE = new PopupWithImage(".popup_type_figure");
-const profile = new UserInfo(".profile__name", ".profile__status");
-const section = new Section({itemsData: initialCards, renderer: renderer}, ".cards");
+const profilePopupCE = new PopupWithForm(popupSelectors.profileEdit, handleProfileFormSubmit);
+const addCardPopupCE = new PopupWithForm(popupSelectors.addCard, handleAddCardFormSubmit);
+const figurePopupCE = new PopupWithImage(popupSelectors.figure);
+const profile = new UserInfo(profileSelectors.name, profileSelectors.status);
+const section = new Section({itemsData: initialCards, renderer: renderer}, cardsContainerSelector);
 
 const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
 const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
@@ -36,18 +40,22 @@ function handleProfileFormSubmit(evt, {name, status}) {
   profilePopupCE.close();
 }
 
+function createCard(itemData) {
+  return new Card(itemData, cardTemplateSelector, figurePopupCE.open).createCard();
+}
+
 /*actions on add card form submit*/
 function handleAddCardFormSubmit(evt, {name, link}) {
   evt.preventDefault();
   const itemData = {name: name, link: link}
-  const card = new Card(itemData, ".card-template", figurePopupCE.open).createCard()
+  const card = createCard(itemData);
   section.addItems(card);
   addCardPopupCE.close();
 }
 
 function renderer(itemsData) {
   itemsData.forEach((itemData) => {
-    const card = new Card(itemData, ".card-template", figurePopupCE.open).createCard()
+    const card = createCard(itemData);
     section.addItems(card);
   })
 }
@@ -56,14 +64,12 @@ function renderer(itemsData) {
 
 /*profile popup open*/
 profileEditBtn.addEventListener("click", () => {
-  /*open popup*/
   profilePopupCE.open();
   profileEditFormValidator.resetValidation()
   const userData = profile.getUserInfo()
   profilePopupCE.setInputValues(userData)
 })
 
-/*profile popup close*/
 profilePopupCE.setEventListeners();
 
 /*add card popup open*/
