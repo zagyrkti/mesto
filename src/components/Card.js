@@ -36,7 +36,7 @@ class Card {
   }
 
   _setEventListeners() {
-    /*fullscreen photo by click on card's img*/
+    /*fullscreen photo by click on card's __img*/
     this._cardPhoto.addEventListener("click", () => {
       this._handleCardClick(this._cardPhoto, this._cardTitle)
     })

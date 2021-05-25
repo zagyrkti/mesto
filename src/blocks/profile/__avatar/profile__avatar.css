@@ -1,9 +1,16 @@
 .profile__avatar {
   width: 120px;
   height: 120px;
-
+  padding: 0;
   grid-area: avatar;
+  border-width: 0;
   justify-self: center;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
+}
+
+.profile__avatar::after {
+  content: "";
+  background: rgba(0, 0, 0, 0.8);
+
 }
