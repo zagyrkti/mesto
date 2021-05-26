@@ -35,20 +35,9 @@ const profilePopupCE = new PopupWithForm(popupSelectors.profileEdit, handleProfi
 const addCardPopupCE = new PopupWithForm(popupSelectors.addCard, handleAddCardFormSubmit);
 const figurePopupCE = new PopupWithImage(popupSelectors.figure);
 const profile = new UserInfo(profileSelectors.name, profileSelectors.status);
+const section = new Section(renderer, cardsContainerSelector);
 
-const section = api.getCards()
-  .then((cardsData) => {
-    cardsData.splice(6);
-    const section = new Section({itemsData: cardsData, renderer: renderer}, cardsContainerSelector);
-    function renderer(itemsData) {
-      itemsData.forEach((itemData) => {
-        const card = createCard(itemData);
-        section.addItems(card);
-      })
-    }
-    section.renderItems();
-    return section;
-  })
+
 
 
 
@@ -59,6 +48,13 @@ const profileEditFormValidator = new FormValidator(selectorConfig, profileEditFo
 
 
 /*------------------functions------------------*/
+
+function renderer(itemsData) {
+  itemsData.forEach((itemData) => {
+    const card = createCard(itemData);
+    section.addItems(card);
+  })
+}
 
 function handleProfileFormSubmit(evt, {name, status}) {
   evt.preventDefault();
@@ -87,8 +83,14 @@ function handleAddCardFormSubmit(evt, {name, link}) {
     section.addItems(card);
   })
 }*/
+/*------------------promise area------------------*/
 
-/*------------------event listeners------------------*/
+api.getCards()
+  .then((cardsData) => {
+    cardsData.splice(6);
+    section.renderItems(cardsData);
+  })
+
 
 /*profile popup open*/
 profileEditBtn.addEventListener("click", () => {
