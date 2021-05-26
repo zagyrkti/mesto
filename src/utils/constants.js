@@ -15,6 +15,7 @@ const popupSelectors = {
   profileEdit : ".popup_type_profile-edit",
   addCard : ".popup_type_add-card",
   figure : ".popup_type_figure",
+  changeAvatar : ".popup_type_change-avatar",
 }
 
 const profileSelectors = {

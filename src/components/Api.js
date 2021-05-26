@@ -1,39 +1,66 @@
 export class Api {
   constructor(options) {
-    this._token = options.token;
+    /*this._token = options.token;*/
     this._cardsUrl = options.cardsUrl;
     this._userUrl = options.userUrl;
+    this._headers = options.headers;
+    this._avatar = options.avatarUrl;
   }
 
   getCards() {
     return fetch(this._cardsUrl, {
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._processResponse)
   }
      
   getUser() {
     return fetch(this._userUrl, {
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this._processResponse)
   }
 
+  addCard(name, link) {
+    return fetch(this._cardsUrl, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link : link
+      })
+    })
+      .then(this._processResponse)
+  }
+
+  setUserAvatar(link) {
+    return fetch(this._avatar, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar : link
+      })
+    })
+      .then(this._processResponse)
+  }
+
+  setUser({name, about}) {
+    return fetch(this._userUrl, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    })
+      .then(this._processResponse)
+  }
+
+  _processResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
 
 }

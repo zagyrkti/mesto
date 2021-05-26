@@ -8,6 +8,7 @@
   justify-self: center;
   border-radius: 50%;
   overflow: hidden;
+  background-color: transparent;
 }
 
 .profile__avatar::after{

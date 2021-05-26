@@ -21,34 +21,40 @@ import {
 } from "../utils/constants.js";
 /*-----------------test-----------------*/
 
+const avatarSelector = ".profile__img";
+const changeAvatarBtn = document.querySelector(".profile__avatar")
+const changeAvatarForm = document.querySelector(".popup-form_type_change-avatar");
+
 const options = {
   token: "29656b2d-ee52-401a-a717-4267ea0b7d96",
   cardsUrl: "https://mesto.nomoreparties.co/v1/cohort-24/cards",
   userUrl: "https://mesto.nomoreparties.co/v1/cohort-24/users/me",
+  avatarUrl: "https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar",
+  headers: {
+    authorization: "29656b2d-ee52-401a-a717-4267ea0b7d96",
+    'Content-Type': 'application/json',
+  }
 }
 const test = "https://storage.yandexcloud.net/zrnpxr-pictures/colorful.jpg"
+
 /*------------------Classes-----------------*/
-
-const api = new Api(options)
-
+/*main*/
 const profilePopupCE = new PopupWithForm(popupSelectors.profileEdit, handleProfileFormSubmit);
 const addCardPopupCE = new PopupWithForm(popupSelectors.addCard, handleAddCardFormSubmit);
+const changeAvatarPopup = new PopupWithForm(popupSelectors.changeAvatar, handleChangeAvatar);
 const figurePopupCE = new PopupWithImage(popupSelectors.figure);
-const profile = new UserInfo(profileSelectors.name, profileSelectors.status);
+const profile = new UserInfo(profileSelectors.name, profileSelectors.status, avatarSelector);
+
+/*service*/
+const api = new Api(options)
 const section = new Section(renderer, cardsContainerSelector);
-
-
-
-
-
-/*const section = new Section({itemsData: initialCards, renderer: renderer}, cardsContainerSelector);*/
-
 const addCardFormValidator = new FormValidator(selectorConfig, addCardForm)
 const profileEditFormValidator = new FormValidator(selectorConfig, profileEditForm);
-
+const changeAvatarFormValidator = new FormValidator(selectorConfig, changeAvatarForm);
 
 /*------------------functions------------------*/
 
+/*card renderer*/
 function renderer(itemsData) {
   itemsData.forEach((itemData) => {
     const card = createCard(itemData);
@@ -56,41 +62,57 @@ function renderer(itemsData) {
   })
 }
 
-function handleProfileFormSubmit(evt, {name, status}) {
-  evt.preventDefault();
-  /*paste info from inputs to profile section*/
-  profile.setUserInfo(name, status)
-  /*close popup*/
-  profilePopupCE.close();
-}
-
 function createCard(itemData) {
   return new Card(itemData, cardTemplateSelector, figurePopupCE.open).createCard();
 }
 
-/*actions on add card form submit*/
+/*------------------handlers------------------*/
+
+function handleProfileFormSubmit(evt, {name, status}) {
+  evt.preventDefault();
+  api.setUser({name: name, about: status})
+    .then((userData) => {
+      profile.setUserInfo(userData)
+    })
+  profilePopupCE.close();
+}
+
 function handleAddCardFormSubmit(evt, {name, link}) {
   evt.preventDefault();
-  const itemData = {name: name, link: link}
-  const card = createCard(itemData);
-  section.addItems(card);
+  api.addCard(name, link)
+    .then((cardData) => {
+      const card = createCard(cardData);
+      section.addItems(card);
+    })
   addCardPopupCE.close();
 }
 
-/*function renderer(itemsData) {
-  itemsData.forEach((itemData) => {
-    const card = createCard(itemData);
-    section.addItems(card);
-  })
-}*/
-/*------------------promise area------------------*/
+function handleChangeAvatar(evt, {link}) {
+  evt.preventDefault();
+  api.setUserAvatar(link)
+    .then((data) => {
+      profile.setUserAvatar(data);
+    })
+  changeAvatarPopup.close();
+}
 
+/*------------------initial data loading------------------*/
+
+/*initial cards loading from server*/
 api.getCards()
   .then((cardsData) => {
-    cardsData.splice(6);
+    /*cardsData.splice(6);*/
     section.renderItems(cardsData);
   })
 
+/*get user data from server*/
+api.getUser()
+  .then((userData) => {
+    profile.setUserInfo(userData);
+    profile.setUserAvatar(userData);
+  })
+
+/*------------------event listeners------------------*/
 
 /*profile popup open*/
 profileEditBtn.addEventListener("click", () => {
@@ -100,23 +122,40 @@ profileEditBtn.addEventListener("click", () => {
   profilePopupCE.setInputValues(userData)
 })
 
-profilePopupCE.setEventListeners();
-
 /*add card popup open*/
 addCardBtn.addEventListener("click", () => {
   addCardPopupCE.open();
-  addCardFormValidator.resetValidation()
+  addCardFormValidator.resetValidation();
 });
 
-addCardPopupCE.setEventListeners();
+/*change avatar*/
+changeAvatarBtn.addEventListener("click", () => {
+  changeAvatarPopup.open()
+  changeAvatarFormValidator.resetValidation();
 
-figurePopupCE.setEventListeners()
+})
+
+
+addCardPopupCE.setEventListeners();
+changeAvatarPopup.setEventListeners();
+figurePopupCE.setEventListeners();
+profilePopupCE.setEventListeners();
 
 /*------------------invocations------------------*/
 
-addCardFormValidator.enableValidation()
-profileEditFormValidator.enableValidation()
+addCardFormValidator.enableValidation();
+profileEditFormValidator.enableValidation();
+changeAvatarFormValidator.enableValidation();
 
 /*------------------render------------------*/
+/*const section = new Section({itemsData: initialCards, renderer: renderer}, cardsContainerSelector);*/
+
+/*function renderer(itemsData) {
+  itemsData.forEach((itemData) => {
+    const card = createCard(itemData);
+    section.addItems(card);
+  })
+}*/
 
 /*section.renderItems();*/
+
