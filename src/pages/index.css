@@ -27,6 +27,8 @@
 @import "../blocks/cards/__like/cards__like.css";
 @import "../blocks/cards/__like/_clicked/cards__like_clicked.css";
 @import "../blocks/cards/__delete/cards__delete.css";
+@import "../blocks/cards/__like-area/cards__like-area.css";
+@import "../blocks/cards/__like-number/cards__like-number.css";
 /*-----------------footer-----------------*/
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";

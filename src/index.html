@@ -50,13 +50,17 @@
     </div>
     <div class="cards__info">
       <p class="cards__title"></p>
+      <div class="cards__like-area">
       <button type="button" class="cards__like link link_type_like"></button>
+        <p class="cards__like-number">0</p>
+      </div>
     </div>
   </li>
 </template>
-<!--popup-form block-->
-<!--figure popup-->
 
+<!--popup-form block-->
+
+<!--figure popup-->
 <div class="popup_type_figure popup">
   <figure class="popup-figure">
     <img src="#" class="popup-figure__image" alt="#">
@@ -64,6 +68,7 @@
     <figcaption class="popup-figure__caption"></figcaption>
   </figure>
 </div>
+
 <!--profile edit popup-->
 <div class="popup_type_profile-edit popup">
   <form class="popup-form popup-form_type_profile-edit" name="profile-edit">
@@ -86,7 +91,8 @@
             class="popup__close popup-form__close popup-form__close_owner_profile-edit link link_type_normal"></button>
   </form>
 </div>
-<!--card add popup-->
+
+<!--add card popup-->
 <div class="popup_type_add-card popup">
   <form class="popup-form popup-form_type_add-card" name="add-card">
     <h2 class="popup-form__title">Новое место</h2>
@@ -106,6 +112,34 @@
     </button>
     <button type="button"
             class="popup__close popup-form__close popup-form__close_owner_add-card link link_type_normal"></button>
+  </form>
+</div>
+
+<!--confirmation popup-->
+<div class="popup_type_confirmation popup">
+  <form class="popup-form popup-form_type_confirmation" name="confirmation">
+    <h2 class="popup-form__title">Вы уверены?</h2>
+    <button type="submit" class="popup-form__save popup-form__save_owner_confirmation link link_type_save">Да
+    </button>
+    <button type="button"
+            class="popup__close popup-form__close popup-form__close_owner_confirmation link link_type_normal"></button>
+  </form>
+</div>
+
+<!--change-avatar popup-->
+<div class="popup_type_change-avatar popup">
+  <form class="popup-form popup-form_type_change-avatar" name="change-avatar">
+    <h2 class="popup-form__title">Новое место</h2>
+    <label>
+      <input type="url" name="link" required
+             class="popup-form__input popup-form__input_type_top popup-form__input_data_avatar-link"
+             placeholder="Ссылка на картинку">
+      <span class="popup-form__input-error popup-form__input-error_type_avatar-link"></span>
+    </label>
+    <button type="submit" class="popup-form__save popup-form__save_owner_change-avatar link link_type_save">Сохранить
+    </button>
+    <button type="button"
+            class="popup__close popup-form__close popup-form__close_owner_change-avatar link link_type_normal"></button>
   </form>
 </div>
 

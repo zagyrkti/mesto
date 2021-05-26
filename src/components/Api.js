@@ -19,7 +19,7 @@ export class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
-
+     
   getUser() {
     return fetch(this._userUrl, {
       headers: {
