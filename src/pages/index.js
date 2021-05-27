@@ -1,7 +1,7 @@
 /*TODO uncomment*/
-/*import './index.css';*/
+import './index.css';
 import {Card} from "../components/Card.js";
-import {initialCards} from "../utils/initial-cards.js";
+/*import {initialCards} from "../utils/initial-cards.js";*/
 import {FormValidator} from "../components/FormValidator.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";

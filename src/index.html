@@ -5,7 +5,7 @@
   <title>Mesto</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <!--TODO comment-->
-  <link rel="stylesheet" href="./pages/index.css">
+  <!--<link rel="stylesheet" href="./pages/index.css">-->
 </head>
 <body class="body">
 <div class="page">
@@ -17,9 +17,10 @@
     <section class="profile">
       <!--TODO switch-->
       <button type="button" class="profile__avatar link">
-        <img class="profile__img" src="./images/ava_placeholder.png" alt="аватарка">
+        <!--<img class="profile__img" src="./images/ava_placeholder.png" alt="аватарка">-->
+        <img class="profile__img" src="<%=require('./images/ava_placeholder.png')%>" alt="аватарка">
       </button>
-      <!--<__img class="profile__avatar" src="<%=require('./images/ava.jpg')%>" alt="аватарка">-->
+
       <div class="profile__wrapper">
         <!--<h1 class="profile__name">Пракхар Конт</h1>-->
         <h1 class="profile__name"></h1>
@@ -146,9 +147,9 @@
 </div>
 
 <!--TODO comment-->
-<script type="module" src="utils/initial-cards.js"></script>
+<!--<script type="module" src="utils/initial-cards.js"></script>
 <script type="module" src="pages/index.js"></script>
 <script type="module" src="components/Card.js"></script>
-<script type="module" src="components/FormValidator.js"></script>
+<script type="module" src="components/FormValidator.js"></script>-->
 </body>
 </html>
