@@ -125,6 +125,7 @@ api.getUser()
     api.getCards()
       .then((cardsData) => {
         /*cardsData.splice(6);*/
+        cardsData.reverse();
         section.renderItems(cardsData);
       })
   })
