@@ -73,6 +73,15 @@ export class Api {
       .then(this._processResponse)
   }
 
+  deleteCard(id) {
+    return fetch(`${this._cardsUrl}/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then(this._processResponse)
+  }
+
+
   _processResponse(res) {
     if (res.ok) {
       return res.json();

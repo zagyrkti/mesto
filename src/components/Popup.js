@@ -3,7 +3,7 @@ export class Popup {
     this._popupElement = document.querySelector(popupSelector);
   }
 
-  open() {
+  open () {
     this._popupElement.classList.add("popup_opened");
     document.addEventListener("keydown", this._closeByEsc);
   }
@@ -23,7 +23,6 @@ export class Popup {
   setEventListeners() {
     /*close by close btn + close by click on overlay*/
     /*mousedown for UX\click slip*/
-    /*Спасибо за фишечку*/
     this._popupElement.addEventListener("mousedown", (evt) => {
       if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close")) {
         this.close()
