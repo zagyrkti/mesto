@@ -30,6 +30,7 @@ const options = {
   cardsUrl: "https://mesto.nomoreparties.co/v1/cohort-24/cards",
   userUrl: "https://mesto.nomoreparties.co/v1/cohort-24/users/me",
   avatarUrl: "https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar",
+  likesUrl: "https://mesto.nomoreparties.co/v1/cohort-24/cards/likes",
   headers: {
     authorization: "29656b2d-ee52-401a-a717-4267ea0b7d96",
     'Content-Type': 'application/json',
@@ -56,17 +57,32 @@ const changeAvatarFormValidator = new FormValidator(selectorConfig, changeAvatar
 
 /*card renderer*/
 function renderer(itemsData) {
+  const id = profile.getId();
   itemsData.forEach((itemData) => {
-    const card = createCard(itemData);
+    const card = createCard(itemData, id);
     section.addItems(card);
   })
 }
 
-function createCard(itemData) {
-  return new Card(itemData, cardTemplateSelector, figurePopupCE.open).createCard();
+function createCard(itemData, id) {
+  return new Card(itemData, cardTemplateSelector, figurePopupCE.open, handleLike, handleRemoveLike, id).createCard();
 }
 
 /*------------------handlers------------------*/
+
+function handleLike(id) {
+ api.setLike(id)
+   .then((cardData) => {
+     this._cardLikeNumber.textContent = cardData.likes.length
+   })
+}
+
+function handleRemoveLike(id) {
+  api.removeLike(id)
+    .then((cardData) => {
+      this._cardLikeNumber.textContent = cardData.likes.length
+    })
+}
 
 function handleProfileFormSubmit(evt, {name, status}) {
   evt.preventDefault();
@@ -99,17 +115,18 @@ function handleChangeAvatar(evt, {link}) {
 /*------------------initial data loading------------------*/
 
 /*initial cards loading from server*/
-api.getCards()
-  .then((cardsData) => {
-    /*cardsData.splice(6);*/
-    section.renderItems(cardsData);
-  })
 
 /*get user data from server*/
 api.getUser()
   .then((userData) => {
     profile.setUserInfo(userData);
     profile.setUserAvatar(userData);
+    profile.setId(userData)
+    api.getCards()
+      .then((cardsData) => {
+        /*cardsData.splice(6);*/
+        section.renderItems(cardsData);
+      })
   })
 
 /*------------------event listeners------------------*/

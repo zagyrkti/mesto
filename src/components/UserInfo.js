@@ -18,4 +18,12 @@ export class UserInfo {
     this._avatarElement.src = avatar;
   }
 
+  setId({_id}) {
+    this.id = _id;
+  }
+
+  getId(){
+    return this.id;
+  }
+
 }

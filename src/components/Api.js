@@ -5,6 +5,7 @@ export class Api {
     this._userUrl = options.userUrl;
     this._headers = options.headers;
     this._avatar = options.avatarUrl;
+    this._likes = options.likesUrl;
   }
 
   getCards() {
@@ -52,6 +53,22 @@ export class Api {
         name: name,
         about: about
       })
+    })
+      .then(this._processResponse)
+  }
+
+  setLike(id) {
+    return fetch(`${this._likes}/${id}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then(this._processResponse)
+  }
+
+  removeLike(id) {
+    return fetch(`${this._likes}/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
     })
       .then(this._processResponse)
   }
