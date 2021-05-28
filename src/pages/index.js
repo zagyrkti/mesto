@@ -62,6 +62,7 @@ function handleLike(id) {
     .then((cardData) => {
       this.cardLikeNumber.textContent = cardData.likes.length
     })
+    .catch(console.log)
 }
 
 function handleRemoveLike(id) {
@@ -69,17 +70,17 @@ function handleRemoveLike(id) {
     .then((cardData) => {
       this.cardLikeNumber.textContent = cardData.likes.length
     })
+    .catch(console.log)
 }
 
 function handleProfileFormSubmit(evt, {name, status}) {
-  evt.preventDefault();
   this.processing(true);
   api.setUser({name: name, about: status})
     .then((userData) => {
-      profile.setUserInfo(userData)
+      profile.setUserInfo(userData);
+      profilePopupCE.close();
     })
     .finally(() => {
-      profilePopupCE.close();
       this.processing(false);
     })
     .catch(console.log)
@@ -87,15 +88,14 @@ function handleProfileFormSubmit(evt, {name, status}) {
 }
 
 function handleAddCardFormSubmit(evt, {name, link}) {
-  evt.preventDefault();
   this.processing(true);
   api.addCard(name, link)
     .then((cardData) => {
       const card = createCard(cardData, profile.getId());
       section.addItems(card);
+      addCardPopupCE.close();
     })
     .finally(() => {
-      addCardPopupCE.close();
       this.processing(false);
     })
     .catch(console.log)
@@ -103,14 +103,13 @@ function handleAddCardFormSubmit(evt, {name, link}) {
 }
 
 function handleChangeAvatar(evt, {link}) {
-  evt.preventDefault();
   this.processing(true);
   api.setUserAvatar(link)
     .then((data) => {
       profile.setUserAvatar(data);
+      changeAvatarPopup.close();
     })
     .finally(() => {
-      changeAvatarPopup.close();
       this.processing(false);
     })
     .catch(console.log)
@@ -122,12 +121,11 @@ function handleCardDelete(evt, id) {
 
   api.deleteCard(id)
     .then(() => {
-      this.card.remove()
+      this.card.remove();
       this.card = null;
+      this.close();
     })
     .catch(console.log)
-  /*отзывчивость лучше*/
-  this.close();
 }
 
 
@@ -136,6 +134,9 @@ function handleCardDelete(evt, id) {
 /*initial cards loading from server*/
 
 /*get user data from server*/
+/*Здравствуйте, через promise.all делать пробовал*/
+/*но страница вроде на вид простенькая а получилась тормозная*/
+/*что бы хоть как то минимизировать время черного экрана\обеспечить движуху сделал последовательно*/
 api.getUser()
   .then((userData) => {
     profile.setUserInfo(userData);
